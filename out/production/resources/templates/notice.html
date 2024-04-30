@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notice</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+<div class= "card" th:each = "i : ${notice}">
+    <img src="https://placehold.co/300">
+    <div>
+        <h4 th:text="${i.id}"></h4>
+        <h4 th:text="${i.date}"></h4>
+        <h4 th:text="${i.title}"></h4>
+    </div>
+</div>
+</body>
+</html>
