@@ -1,0 +1,37 @@
+package com.example.shop;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class ItemService {
+
+    private final ItemRepository itemRepository;
+    public void saveItem(String title, Integer price){
+        Item item = new Item();
+        item.setTitle(title);
+        item.setPrice(price);
+        itemRepository.save(item);
+    }
+
+    public void updateItem(Long id, String title, Integer price){
+        Item item = new Item();
+        item.setId(id);
+        item.setTitle(title);
+        item.setPrice(price);
+        itemRepository.save(item);
+    }
+
+    public List<Item> find(){
+        return itemRepository.findAll();
+    }
+
+    public Optional<Item> findOne(Long id){
+        return itemRepository.findById(id);
+    }
+
+}

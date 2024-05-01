@@ -15,10 +15,4 @@ public class Item {
     @Column(length = 200)
     private String title;
     private Integer price;
-
-    public Item(String title, String price, Long id){
-        this.title = title;
-        this.price = Integer.parseInt(price);
-        this.id = id;
-    }
 }
