@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace = "~{nav.html::navbar}"></div>
+<h4>로그인 페이지</h4>
+
+<div th:if = "${param.error}">
+    <h4>ID/PW 오류</h4>
+</div>
+
+<form action="/login" method="post">
+    <p>username</p>
+    <input name="username">
+    <p>password</p>
+    <input name="password" type="password">
+    <button type="submit">전송</button>
+</form>
+</body>
+</html>

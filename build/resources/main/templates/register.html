@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace = "~{nav.html::navbar}"></div>
+<h4>회원가입 페이지</h4>
+
+
+<form action="/member" method="post">
+    <p>userName</p>
+    <input name="username">
+    <p>password</p>
+    <input name="password">
+    <p>displayName</p>
+    <input name="displayName">
+    <button type="submit">전송</button>
+</form>
+</body>
+</html>

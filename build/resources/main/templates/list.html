@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace = "~{nav.html::navbar}"></div>
+
+<div class="card" th:each = "i : ${items}">
+    <div>
+        <h4 th:text="${i.id}"></h4>
+        <h4 th:text="${i.title}"></h4>
+        <h4 th:text="${i.price}"></h4>
+        <img th:src = "${i.imgUrl}">
+        <a th:href="@{'/detail/'+${i.id}}">상세페이지</a>
+        <a th:href="@{'/edit/'+${i.id}}">수정페이지</a>
+        <a th:href="@{'/delete/'+${i.id}}">삭제페이지</a>
+        <span th:onclick="fetch('/item?id=[[${i.id}]]',{method:'DELETE'})">삭제버튼</span>
+    </div>
+</div>
+
+<div class="card" th:each="pageNumber : ${#numbers.sequence(1, pages)}">
+    <form th:action="@{'/list/page/' + ${pageNumber}}" method="get">
+        <button type="submit" th:text="${pageNumber}">Page</button>
+    </form>
+</div>
+
+</body>
+</html>

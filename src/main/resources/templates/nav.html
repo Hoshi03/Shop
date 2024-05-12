@@ -2,4 +2,12 @@
     <a class="logo">SpringMall</a>
     <a href="/list" >List</a>
     <a href="/write" >Write</a>
+    <a href="salesList">OrderList</a>
+    <div sec:authorize="isAuthenticated()">
+        <div>로그인 id </div>
+        <div sec:authentication="principal.username"></div>
+        <form action="/logout" method="get">
+            <button type="submit">로그아웃</button>
+        </form>
+    </div>
 </div>

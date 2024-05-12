@@ -5,15 +5,49 @@
     <title>Title</title>
     <link href="/main.css" rel="stylesheet">
 </head>
+
 <body>
 <div th:replace = "~{nav.html::navbar}"></div>
 
-<div class="card">
-    <form action="/add" method="post">
-        <input name="title">
-        <input name="price">
-        <button type="submit">전송</button>
-    </form>
-</div>
+<!-- csrf 키면 토큰이 있어야 서버가 받아줌-->
+<!--
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+-->
+
+<form action="/add" method="post">
+    <input name="title" placeholder="제목을 입력하세요">
+    <input name="price" placeholder="가격을 입력하세요">
+    <input name="imgurl">
+    <!-- input에 입력시 getURL()을 실행 -->
+    <input type = "file" aria-valuetext="" onchange="getURL((this))">
+    <img src = "url" >
+    <button type="submit">전송</button>
+</form>
+
+
+
+<!-- 유저가 입력한 파일을 인코딩해서 보냄 -->
+<script>
+    async function getURL(e){
+        let name = encodeURIComponent(e.files[0].name)
+        let result = await fetch('/presigned-url?filename=' + e.files[0].name)
+        result = await result.text()
+
+        let response = await fetch(result,{
+            method : 'PUT',
+            body : e.files[0]
+        })
+
+        console.log(response)
+
+        if (response.ok) {
+            // S3 업로드 성공시 실행
+            let url = result.split("?")[0];
+            document.querySelector('input[name="imgurl"]').value = url;
+            document.querySelector('img').src = url;
+            console.log(url)
+        }
+    }
+</script>
 </body>
 </html>

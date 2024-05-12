@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace = "~{nav.html::navbar}"></div>
+
+<div class="detail">
+    <h4>상세페이지</h4>
+    <img th:src ="${item.imgUrl}">
+    <p th:text ="${item.id}">
+    <p th:text ="${item.title}">
+    <p th:text ="${item.price}">
+</div>
+</body>
+</html>

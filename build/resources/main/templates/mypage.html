@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace = "~{nav.html::navbar}"></div>
+<h4>마이페이지</h4>
+
+<div sec:authentication="principal"></div>
+<div sec:authentication="principal.username"></div>
+<div sec:authorize="hasAuthority('일반유저')">
+    <h4>일반 유저권한을 가져야만 보여줌 </h4>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <h4>로그인한 사람만 보여줌</h4>
+</div>
+
+<div sec:authorize="isAnonymous()">
+    <h4>로그아웃 한 사람만 보여줌</h4>
+</div>
+</body>
+</html>

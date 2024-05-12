@@ -45,6 +45,16 @@ input {
 }
 .detail img{
     max-width : 30%;
+    max-height: 500px;
     display : block;
     margin : auto;
+}
+
+.paging form {
+    float: left;
+    margin-right: 10px;
+}
+
+.detail a {
+    text-decoration: underline;
 }
