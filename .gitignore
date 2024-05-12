@@ -26,4 +26,3 @@ replay_pid*
 # Spring Boot application properties
 application.properties
 out/production/resources/application.properties
-*.properties
