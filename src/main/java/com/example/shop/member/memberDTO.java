@@ -4,7 +4,7 @@ import lombok.Getter;
 
 //DTO를 만들어서 데이터를 보낸다
 @Getter
-class MemberDto {
+public class MemberDto {
     private String username;
     private String displayname;
     private Long id;

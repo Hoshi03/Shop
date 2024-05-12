@@ -16,11 +16,11 @@
 
 <div class="card" th:each = "i : ${salesList}">
     <div>
-        <h4 th:text="'주문 아이디 : ' + ${i.id}"></h4>
+        <h4 th:text="'구매자 이름 : ' + ${i.userName}"></h4>
         <h4 th:text="'주문 상품 이름 : ' + ${i.itemName}"></h4>
         <h4 th:text="'주문 상품 가격 : ' + ${i.price}"></h4>
         <h4 th:text="'주문 수량 : ' + ${i.count}"></h4>
-        <h4 th:text="'구매자 id : ' + ${i.memberId}"></h4>
+        <h4 th:text="'총 가격 : ' + ${i.sum}"></h4>
         <h4 th:text="'주문 일시 : ' +${i.created}"></h4>
     </div>
 </div>
