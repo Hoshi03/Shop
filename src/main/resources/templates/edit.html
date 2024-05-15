@@ -8,19 +8,19 @@
 <body>
 <div th:replace = "~{nav.html::navbar}"></div>
 
-<div class="update">
-  <p th:text ="${item.id}">
+<div class="card">
+<!--  <p th:text ="${item.id}">
   <p th:text ="${item.title}">
-  <p th:text ="${item.price}">
+  <p th:text ="${item.price}">-->
   <img th:src= "${item.imgUrl}">
   <form action="/edit" method="post">
     <input name="id" th:value = "${item.id}" style="display:none">
     <input name="title" th:value = "${item.title}">
     <input name="price" th:value = "${item.price}">
-    <input name="imgurl">
+    <input name="imgurl" type="hidden">
     <!-- input에 입력시 getURL()을 실행 -->
     <input type = "file" aria-valuetext="" onchange="getURL((this))">
-    <img src = "url">
+<!--    <img src = "url">-->
     <button type="submit">전송</button>
   </form>
   <!-- 유저가 입력한 파일을 인코딩해서 보냄 -->

@@ -49,7 +49,7 @@ public class SecurityConfig {
         );
 
         // /logout 주소로 get 요청 보내면 로그아웃이 된다
-        http.logout(logout -> logout.logoutUrl("/logout"));
+        http.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/list"));
 
         return http.build();
     }

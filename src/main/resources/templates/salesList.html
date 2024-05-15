@@ -14,7 +14,7 @@
     <button>검색</button>
 </form>
 
-<div class="card" th:each = "i : ${salesList}">
+<div class="table" th:each = "i : ${salesList}">
     <div>
         <h4 th:text="'구매자 이름 : ' + ${i.userName}"></h4>
         <h4 th:text="'주문 상품 이름 : ' + ${i.itemName}"></h4>

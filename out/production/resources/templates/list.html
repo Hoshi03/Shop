@@ -10,13 +10,13 @@
 <div th:replace = "~{nav.html::navbar}"></div>
 
 <form action="/search" method="GET">
-    <input name="searchText" style="display: inline">
+    <input name="searchText" style="display: inline" placeholder="검색할 상품명을 입력하세요">
     <button>검색</button>
 </form>
 
 <div class="card" th:each = "i : ${items}">
     <div>
-        <h4 th:text="${i.id}"></h4>
+        <!--<h4 th:text="${i.id}"></h4>-->
         <h4 th:text="${i.title}"></h4>
         <h4 th:text="${i.price}"></h4>
         <img th:src = "${i.imgUrl}">

@@ -27,7 +27,7 @@ public class SalesController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/order")
     String postSales(@RequestParam Integer count, @RequestParam Integer price,
-                       @RequestParam String itemName, Model model , Authentication auth){
+                       @RequestParam String itemName, Authentication auth){
         CustomUser user = (CustomUser) auth.getPrincipal(); //로그인 된 사용자 정보 가져오기!
         Sales sales = new Sales();
         sales.setItemName(itemName);

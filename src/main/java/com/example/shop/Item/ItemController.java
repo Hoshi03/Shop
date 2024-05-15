@@ -23,6 +23,11 @@ public class ItemController {
     private final S3Service s3Service;
     private final CommentRepository commentRepository;
 
+    @GetMapping("/")
+    public String redirectToList() {
+        return "redirect:/list";
+    }
+
     @GetMapping("/list")
     String hello(Model model){
         Page<Item> page = itemRepository.findPageBy(PageRequest.of(0, 5));

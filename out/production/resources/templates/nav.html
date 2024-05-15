@@ -1,13 +1,23 @@
-<div class="nav" th:fragment = "navbar">
-    <a class="logo">SpringMall</a>
+<span class="nav" th:fragment = "navbar">
+    <a class="logo">Shopping Mall</a>
     <a href="/list" >List</a>
     <a href="/write" >Write</a>
     <a href="salesList">OrderList</a>
-    <div sec:authorize="isAuthenticated()">
-        <div>로그인 id </div>
-        <div sec:authentication="principal.username"></div>
-        <form action="/logout" method="get">
+    <span sec:authorize="isAuthenticated()">
+        <span>로그인 id :  </span>
+        <span sec:authentication="principal.username"></span>
+        <form action="/logout" method="get" style="display: inline-block;">
             <button type="submit">로그아웃</button>
         </form>
-    </div>
-</div>
+    </span>
+
+    <span sec:authorize="isAnonymous()">
+    <!-- 익명 사용자일 때의 내용 -->
+     <form action="/login" method="get" style="display: inline-block;">
+            <button type="submit">로그인</button>
+     </form>
+     <form action="/register" method="get" style="display: inline-block;">
+            <button type="submit">회원가입</button>
+     </form>
+    </span>
+</span>

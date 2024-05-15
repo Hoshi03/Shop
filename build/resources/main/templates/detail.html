@@ -9,11 +9,48 @@
 <div th:replace = "~{nav.html::navbar}"></div>
 
 <div class="detail">
-    <h4>상세페이지</h4>
+    <!--<h4>상세페이지</h4>-->
     <img th:src ="${item.imgUrl}">
-    <p th:text ="${item.id}">
+<!--    <p th:text ="${item.id}">-->
     <p th:text ="${item.title}">
     <p th:text ="${item.price}">
+    <a th:href="@{'/detail/'+${item.id}+'/comment'}">댓글달기</a>
 </div>
+
+<div class="card" th:each = "i : ${comments}">
+    <div>
+        <h4 th:text="${i.username}"></h4>
+        <h4 th:text="${i.content}"></h4>
+    </div>
+</div>
+
+<span sec:authorize="isAuthenticated()">
+    <form action="/order" method="post">
+        <input name="price" th:value = "${item.price}" type="hidden">
+        <input name="count" placeholder="주문수량을 입력하세요">
+        <input name="itemName" th:value = "${item.title}" type="hidden">
+        <button type="submit">전송</button>
+    </form>
+
+    <form action="/comment" method="post">
+        <input name="content" placeholder="댓글 내용을 입력하세요">
+        <input name="parentId" th:value = "${item.id}" style="display : none">
+        <button type="submit">전송</button>
+    </form>
+</span>
+
+<span sec:authorize="isAnonymous()">
+    <!-- 익명 사용자일 때의 내용 -->
+    <h4> 댓글, 주문 기능은 로그인 해야 사용가능합니다</h4>
+</span>
+
+
+
+<!--<div class="paging" th:each="pageNumber : ${#numbers.sequence(1, pages)}">
+    <form th:action="@{'/list/page/' + ${pageNumber}}" method="get">
+        <button type="submit" th:text="${pageNumber}">Page</button>
+    </form>
+</div>-->
+
 </body>
 </html>
