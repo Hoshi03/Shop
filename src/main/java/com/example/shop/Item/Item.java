@@ -19,4 +19,6 @@ public class Item {
     private Integer price;
     @Column
     private String imgUrl;
+    @Column
+    private Long memberId;
 }

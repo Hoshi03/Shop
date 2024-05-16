@@ -28,3 +28,5 @@ application.properties
 out/production/resources/application.properties
 out/production/resources/application.properties
 *.properties
+out/production/resources/application.properties
+*.properties

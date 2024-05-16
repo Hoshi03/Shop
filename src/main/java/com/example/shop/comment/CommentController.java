@@ -18,7 +18,7 @@ public class CommentController {
                        @RequestParam Long parentId,
                        Authentication auth){
         CustomUser user = (CustomUser) auth.getPrincipal(); //로그인 된 사용자 정보 가져오기!
-        commentService.saveComments(user.getUsername(),content,parentId);
+        commentService.saveComments(user.displayName,content,parentId);
         return "redirect:detail/"+parentId;
     }
 }

@@ -3,10 +3,13 @@ package com.example.shop.Item;
 import com.example.shop.comment.Comment;
 import com.example.shop.comment.CommentRepository;
 import com.example.shop.comment.CommentService;
+import com.example.shop.member.CustomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,12 +53,14 @@ public class ItemController {
         return "write.html";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
-    String addPost(String title, Integer price, String imgurl){
+    String addPost(String title, Integer price, String imgurl, Authentication auth){
+        CustomUser user = (CustomUser) auth.getPrincipal();
         if (title == null || price == null){
             return "redirect:/write";
         }
-        itemService.saveItem(title,price,imgurl);
+        itemService.saveItem(title,price,imgurl, user.userId);
         return "redirect:/list";
     }
 
@@ -74,26 +79,34 @@ public class ItemController {
         else return "redirect:/list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/edit/{id}")
-    String edit(@PathVariable Long id, Model model){
+    String edit(@PathVariable Long id, Model model, Authentication auth){
+        CustomUser user = (CustomUser) auth.getPrincipal();
         Optional<Item> result = itemService.findOne(id);
-        if (result.isPresent()){
+        if (result.get().getMemberId().equals(user.userId)){
             model.addAttribute("item", result.get());
             return "edit.html";
         }
         else return "redirect:/list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/edit")
-    String editItem(Long id, String title, Integer price, String imgurl){
-        itemService.updateItem(id,title,price, imgurl);
+    String editItem(Long id, String title, Integer price, String imgurl, Authentication auth){
+        CustomUser user = (CustomUser) auth.getPrincipal();
+        itemService.updateItem(id,title,price, imgurl, user.userId);
         return "redirect:/list";
     }
 
     //db에서 삭제
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
-    String delete(@PathVariable Long id){
-        itemService.delete(id);
+    String delete(@PathVariable Long id, Authentication auth){
+        CustomUser user = (CustomUser) auth.getPrincipal();
+        if (itemService.findOne(id).get().getMemberId().equals(user.userId)){
+            itemService.delete(id);
+        }
         return "redirect:/list";
     }
 

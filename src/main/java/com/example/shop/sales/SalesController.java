@@ -42,9 +42,13 @@ public class SalesController {
         return "redirect:/salesList";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/salesList")
-    String salesList(Model model) {
-        List<Sales> salesList = salesRepository.customFindAll();
+    String salesList(Model model, Authentication auth) {
+        CustomUser user = (CustomUser) auth.getPrincipal();
+        Optional<Member> member = memberRepository.findById(user.userId);
+        Member member1 = member.get();
+        List<Sales> salesList = salesRepository.findAllByMember(member1);
         List<SalesDto> salesDtoList = new ArrayList<>();
 
         for (Sales sales : salesList) {

@@ -12,21 +12,23 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    public void saveItem(String title, Integer price, String imgurl){
+    public void saveItem(String title, Integer price, String imgurl, Long memberID){
         Item item = new Item();
         item.setTitle(title);
         item.setPrice(price);
         item.setImgUrl(imgurl);
+        item.setMemberId(memberID);
         itemRepository.save(item);
     }
 
-    public void updateItem(Long id, String title, Integer price, String imgurl) {
+    public void updateItem(Long id, String title, Integer price, String imgurl, Long memberID) {
         Optional<Item> optionalItem = itemRepository.findById(id);
         if (optionalItem.isPresent()) {
             Item item = optionalItem.get();
             item.setTitle(title);
             item.setPrice(price);
             item.setImgUrl(imgurl);
+            item.setMemberId(memberID);
             itemRepository.save(item);
         }
     }
