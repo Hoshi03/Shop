@@ -14,6 +14,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     Page<Item> findPageBy(Pageable page);
     List<Item> findAllByTitleContains(String title);
 
+    // 검색어 포함된 상품을 가져온다
     @Query(value = "select * from item where match(title) against(?1)", nativeQuery = true)
     List<Item> rawQuery1(String searchText);
 }

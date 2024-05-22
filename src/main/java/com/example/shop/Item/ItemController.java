@@ -7,6 +7,7 @@ import com.example.shop.member.CustomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -33,16 +34,26 @@ public class ItemController {
 
     @GetMapping("/list")
     String hello(Model model){
-        Page<Item> page = itemRepository.findPageBy(PageRequest.of(0, 5));
-        model.addAttribute("items",page);
+        // 정렬 조건: ID 역순
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        // PageRequest 생성 시 정렬 조건 추가
+        PageRequest pageRequest = PageRequest.of(0, 5, sort);
+        Page<Item> page = itemRepository.findPageBy(pageRequest);
+
+        model.addAttribute("items", page);
         model.addAttribute("pages", page.getTotalPages());
+
         return "list.html";
     }
+
 
     @GetMapping("/list/page/{id}")
     String getListPage(Model model, @PathVariable Integer id){
         //n번째 페이지에서 m개 가져온다
-        Page<Item> page = itemRepository.findPageBy(PageRequest.of(id-1, 5));
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        // PageRequest 생성 시 정렬 조건 추가
+        PageRequest pageRequest = PageRequest.of(id-1, 5, sort);
+        Page<Item> page = itemRepository.findPageBy(pageRequest);
         model.addAttribute("items",page);
         model.addAttribute("pages", page.getTotalPages());
         return "list.html";
